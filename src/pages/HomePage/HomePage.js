@@ -14,7 +14,7 @@ function Homepage() {
     // Fetch launches
     fetch("/launches")
       .then((response) => response.json())
-      .then((data) => setLaunches(data.results.slice(0, 2)))
+      .then((data) => setLaunches(data.results.slice(0, 4)))
       .catch((error) => console.error("Error fetching launches:", error));
   }, []);
 
