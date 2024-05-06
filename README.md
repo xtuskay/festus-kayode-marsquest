@@ -14,14 +14,14 @@ When looking for information about your favourite rocket or details on the next 
     - to look for previous and upcoming launches.
     - to look for details of existing and past space vehicles.
     - to look for current news on spaceflight and activities.
-    - to look for jobs relating to the space industry.
+    - to look current events and news relating to the space industry.
 
 ### Features
  
 - This app will feature a homepage that displays a few upcoming and past launches with some news snippets. 
 - The "launches" page will have two sections displaying upcoming and previous launches exhaustively. 
 - The "vehicles" page will display all space vehicles with a section for reusable vehicles. 
-- The jobs page will consolidate jobs from multiples sources and diplay them from most recent to least recent.
+- The events page will display events and new relevant to the space industry.
 
 ## Implementation
 
@@ -29,7 +29,6 @@ When looking for information about your favourite rocket or details on the next 
 
 - React
 - TypeScript
-- MySQL
 - Express
 - node.js
 - Client libraries: 
@@ -42,16 +41,16 @@ When looking for information about your favourite rocket or details on the next 
 
     
 ### APIs
-
-- https://api.nasa.gov/
-- https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exlimit=max&explaintext&titles=List_of_orbital_launch_systems
+- https://thespacedevs.com/llapi
+- https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&     exlimit=max&explaintext&titles=List_of_orbital_launch_systems
 
 ### Sitemap
 
 - Home page
+- Events page
 - Launches (past and upcoming)
 - Vehicles (reusable and non-resuable)
-- Jobs section
+
 
 ### Mockups
 
@@ -76,7 +75,47 @@ Describe your data and the relationships between them. You can show this visuall
 
 List endpoints that your server will implement, including HTTP methods, parameters, and example responses.
 
+- GET /2.2.0/launch/
+    - "id": "e3df2ecd-c239-472f-95e4-2b89b4f75800",
+            "url": "https://ll.thespacedevs.com/2.2.0/launch/e3df2ecd-c239-472f-95e4-2b89b4f75800/",
+            "slug": "sputnik-8k74ps-sputnik-1",
+            "name": "Sputnik 8K74PS | Sputnik 1",
+            "status": {
+                "id": 3,
+                "name": "Launch Successful",
+                "abbrev": "Success",
+                "description": "The launch vehicle successfully inserted its payload(s) into the target orbit(s)."
+            },
 
+- GET /2.2.0/event/
+    - {
+            "id": 2,
+            "url": "https://ll.thespacedevs.com/2.2.0/event/2/",
+            "slug": "crew-dragon-docking-with-iss",
+            "name": "Crew Dragon docking with ISS",
+            "updates": [],
+            "last_updated": "2024-03-06T20:01:20Z",
+            "type": {
+                "id": 2,
+                "name": "Docking"
+            },
+            "description": "Crew Dragon 1, launched on March 2, will attempt to dock autonomously with the International Space Station for the first time.",
+            "webcast_live": false,
+            "location": "International Space Station",
+            "news_url": null,
+            "video_url": null,
+            "info_urls": [],
+            "vid_urls": [],
+            "feature_image": "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/images/spacex_dm-2_cre_image_20200504065311.jpeg",
+            "date": "2019-03-03T08:30:00Z",
+            "date_precision": null,
+            "duration": null,
+            "agencies": [],
+            "launches": [],
+            "expeditions": [],
+            "spacestations": [],
+            "program": []
+        },
 ## Roadmap
 
 Scope your project as a sprint. Break down the tasks that will need to be completed and map out timeframes for implementation. Think about what you can reasonably complete before the due date. The more detail you provide, the easier it will be to build.
@@ -94,19 +133,23 @@ Scope your project as a sprint. Break down the tasks that will need to be comple
 - Feature: Launches Page
     - Create GET /launches
 
+- Feature: Events Page
+
 - Feature: Vehicles Page
     - Create two sections, one for previous launches and the other for upcoming launches
     - Fetch data from API to populate both fields.
 
-- Feature: Jobs Page
-    - Fetch data from multiple APIs to update job section
-    - Add states for Date added
+    
+    
 
 - Bug fixes
 
 - DEMO DAY
 
 ## Nice-to-haves
+- User profiles
+- A jobs page with user profiles with related jobs related to their preferences.
+- User settings where users can choose prefered launch locations
 
 
 
