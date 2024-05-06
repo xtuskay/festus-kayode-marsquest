@@ -34,7 +34,7 @@ function Header() {
             <Link to="/launches">Launches</Link>
           </li>
           <li>
-            <Link to="/about">Vehicles</Link>
+            <Link to="/vehicles">Vehicles</Link>
           </li>
         </ul>
       </nav>
