@@ -3,6 +3,7 @@ import Header from './components/Header/Header';
 import HomePage from "./pages/HomePage/HomePage";
 import Events from './pages/Events/Events';
 import Launches from './pages/Launches/Launches';
+import Vehicles from './pages/Vehicles/Vehicles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/events" element={<Events />} />
         <Route path="/launches" element={<Launches />} />
+        <Route path="/vehicles" element={<Vehicles />} />
    
         </Routes>
       </ BrowserRouter >

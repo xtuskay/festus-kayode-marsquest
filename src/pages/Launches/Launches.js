@@ -7,11 +7,12 @@ function Launches() {
     // Get today's date in ISO format 
     const today = new Date().toISOString().split("T")[0];
 
-    fetch(`/launch/?mode=list&window_end__gte=${today}`)
+    // fetch(`/launches/?mode=list&window_end__gte=${today}`)
+    fetch("/launches")
       .then((response) => response.json())
       .then((data) => setLaunches(data.results))
       .catch((error) => console.error("Error:", error));
-  }, []); // Empty dependency array to ensure useEffect only runs once on component mount
+  }, []); 
 
   return (
     <div className="launches__container">
