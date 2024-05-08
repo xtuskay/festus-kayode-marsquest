@@ -1,0 +1,36 @@
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+
+
+*, 
+*::before,
+*::after {
+    box-sizing: border-box;
+  }
+  
+body {
+    margin: 0;
+}
+
+h2 {
+  font-family: "IBMPlexSans", Arial, Helvetica, sans-serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+  @include tablet {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+  }
+  @include desktop {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+  }
+
+}
+
+p {
+  font-family: "IBMPlexSans", Arial, Helvetica, sans-serif;
+}
