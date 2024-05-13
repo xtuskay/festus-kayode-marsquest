@@ -73,6 +73,8 @@
   &__image-container {
     height: 300px;
     overflow: hidden;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
 
   &__image {
