@@ -38,6 +38,11 @@
       
       &__card {
         width: 100%;
+        cursor: pointer;
+        &:hover{
+          background-color: $color-lightred;
+        }
+      
 
         @include tablet {
           width: calc(50% - 10px); 
