@@ -7,10 +7,10 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Center vertically */
+  align-items: center; 
   padding: 10px 20px;
-  background-color: $color-mars; /* Example background color */
-  color: white; /* Example text color */
+  background-color: $color-mars; 
+  color: white; 
   height: 70px;
 
   &__logo {
@@ -19,9 +19,9 @@
     margin: 0;
     font-size: 1rem;
     display: flex; 
-    align-items: center; /* Center horizontally and vertically */
-    flex: 1; /* Take up remaining space */
-    // position: fixed;
+    align-items: center; 
+    flex: 1; 
+
   }
 
   &__menu-btn {
@@ -35,7 +35,7 @@
     svg {
       fill: white; 
       width: 24px; 
-      height: 24px; /* Example icon size */
+      height: 24px; 
     }
   }
 
@@ -54,7 +54,7 @@
         //   margin-left: 0;
         }
         a {
-          color: white; /* Example link color */
+          color: white; 
           text-decoration: none;
           &:hover {
             text-decoration: underline;
@@ -73,77 +73,10 @@
 }
 
 
-
-
-// .header {
-//   position: fixed; /* Fix the header position on the page */
-//   top: 0; /* Position it at the top of the page */
-//   left: 0; /* Position it at the left of the page */
-//   width: 100%; /* Take up the full width of the page */
-//   height: 70px; /* Set the height of the header */
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center; /* Center vertically */
-//   padding: 0 20px; /* Adjust padding */
-//   background-color: $color-green; /* Example background color */
-//   color: white; /* Example text color */
-
-//   &__logo {
-//     cursor: pointer;
-//     margin: 0;
-//     font-size: 1rem;
-//     display: flex; /* Enable flex properties */
-//     align-items: center; /* Center horizontally and vertically */
-//     flex: 1; /* Take up remaining space */
-//   }
-
-//   &__menu-btn {
-//     background: none;
-//     border: none;
-//     cursor: pointer;
-//     display: flex;
-//     align-items: center;
-//     padding: 5px;
-//     justify-content: flex-end; /* Align menu button to the right */
-//     svg {
-//       fill: white; /* Example icon color */
-//       width: 24px; /* Example icon size */
-//       height: 24px; /* Example icon size */
-//     }
-//   }
-
-//   &__nav {
-//     display: none; /* Hide navigation menu by default */
-//     position: absolute; /* Position the menu absolutely */
-//     top: 70px; /* Position it below the header */
-//     left: 0; /* Position it at the left of the page */
-//     width: 100%; /* Take up the full width */
-//     background-color: $color-green; /* Match header background color */
-//     ul {
-//       list-style-type: none;
-//       padding: 0;
-//       margin: 0;
-//       display: flex;
-//       justify-content: center; /* Center menu items horizontally */
-//       li {
-//         margin-left: 20px;
-//         &:first-child {
-//           margin-left: 0;
-//         }
-//         a {
-//           color: white; /* Example link color */
-//           text-decoration: none;
-//           &:hover {
-//             text-decoration: underline;
-//           }
-//         }
-//       }
-//     }
-//   }
-
 //   &.open {
 //     .header__nav {
-//       display: block; /* Show navigation menu when header is open */
+//       display: block; // Show the nav when the header has the "open" class
+//       transition: all 0.3s ease; // Apply transition effect
 //     }
 //   }
 // }
