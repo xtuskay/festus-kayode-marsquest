@@ -35,12 +35,17 @@
       flex-wrap: wrap;
       gap: 20px;
     }
-      // Default: Single column
+      
       &__card {
-        width: 100%; // Single card in a row by default
+        width: 100%;
+        cursor: pointer;
+        &:hover{
+          background-color: $color-lightred;
+        }
+      
 
         @include tablet {
-          width: calc(50% - 10px); // Two cards per row on tablets
+          width: calc(50% - 10px); 
         }
 
         background-color: $color-white;
@@ -90,6 +95,33 @@
             color: $color-red;
           }
         }
+
+        &__toggle {
+            display: flex;
+            justify-content: space-around; 
+            margin-bottom: 20px;
+        
+
+        &-button {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border: none;
+            background-color: $color-white;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+
+            &.active {
+                font-weight: bold;
+                background-color: $color-mars;
+                color: $color-white;
+            }
+
+            &:not(:last-child) {
+                margin-right: 10px;
+            }
+        }
+    }
       
     
   
