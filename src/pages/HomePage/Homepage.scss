@@ -40,11 +40,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    cursor: pointer;
-    &:hover{
-      background-color: $color-lightred;
-    }
-
+    
     @include tablet {
       justify-content: space-between; 
     }

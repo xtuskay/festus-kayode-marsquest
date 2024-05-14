@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -8,14 +9,21 @@ function Launches() {
   const [showUpcoming, setShowUpcoming] = useState(true);
 
   useEffect(() => {
-    fetchLaunches();
+    const cachedLaunches = localStorage.getItem("launches");
+    if (cachedLaunches) {
+      setLaunches(JSON.parse(cachedLaunches));
+    } else {
+      fetchLaunches();
+    }
   }, [showUpcoming]);
 
   const fetchLaunches = async () => {
     try {
       const endpoint = showUpcoming ? "/launches/" : "/launches/past";
       const response = await axios.get(endpoint);
-      setLaunches(response.data.results.map(launch => ({ ...launch, expanded: false })));
+      const updatedLaunches = response.data.results.map(launch => ({ ...launch, expanded: false }));
+      setLaunches(updatedLaunches);
+      localStorage.setItem("launches", JSON.stringify(updatedLaunches)); 
     } catch (error) {
       console.error("Error fetching launches:", error);
     }
@@ -28,7 +36,7 @@ function Launches() {
   const toggleCard = (id) => {
     setLaunches((prevLaunches) =>
       prevLaunches.map((launch) =>
-        launch.id === id ? { ...launch, expanded: !launch.expanded } : { ...launch, expanded: false } // Collapse other cards when one is expanded
+        launch.id === id ? { ...launch, expanded: !launch.expanded } : { ...launch, expanded: false } 
       )
     );
   };
@@ -104,3 +112,4 @@ function Launches() {
 }
 
 export default Launches;
+
