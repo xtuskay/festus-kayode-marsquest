@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from './components/Header/Header';
 import HomePage from "./pages/HomePage/HomePage";
 import Events from './pages/Events/Events';
+import Footer from './components/Footer/Footer';
 import Launches from './pages/Launches/Launches';
 import Vehicles from './pages/Vehicles/Vehicles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -28,8 +29,8 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/launches" element={<Launches />} />
         <Route path="/vehicles" element={<Vehicles />} />
-   
         </Routes>
+        <Footer />
       </ BrowserRouter >
     </div>
   );
