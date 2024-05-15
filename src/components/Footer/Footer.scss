@@ -1,0 +1,38 @@
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.footer {
+  background-color: $color-white;
+  padding: 20px 0;
+
+  .footer__content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer__social-links {
+    display: flex;
+    align-items: center;
+
+    .footer__icon {
+      width: auto;
+      height: 40px;
+      margin-right: 20px;
+      transition: transform 0.3s;
+      gap: 1rem;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
