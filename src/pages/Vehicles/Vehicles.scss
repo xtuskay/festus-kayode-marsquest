@@ -17,7 +17,29 @@
     font-size: 24px;
     margin-bottom: 20px;
   }
+  &__search {
+    margin-bottom: 2rem;
 
+    &-input {
+        width: 100%; 
+
+    @include tablet {
+        width: 50%; 
+    }
+    @include desktop {
+        width: 50%; 
+    }
+
+    
+        height: 40px; 
+        padding: 0 10px; 
+        border: 1px solid $color-mars; 
+        border-radius: 4px; 
+        font-size: 16px; 
+        color: $color-mars;
+    }
+  }
+  
   &__toggle {
     display: flex;
     justify-content: space-around;
