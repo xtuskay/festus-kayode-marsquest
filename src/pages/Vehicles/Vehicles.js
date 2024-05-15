@@ -1,163 +1,60 @@
 
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
-// import "./Vehicles.scss";
-
-// function VehiclesPage() {
-//   const [vehicles, setVehicles] = useState([]);
-//   const [showReusableVehicles, setShowReusableVehicles] = useState(false);
-
-//   useEffect(() => {
-//     fetchVehicles();
-//   }, []);
-
-//   const fetchVehicles = async () => {
-//     try {
-//       const response = await axios.get("/vehicles");
-//       const vehiclesData = response.data.results;
-
-//       // Filter reusable vehicles if "Reusable Vehicles" tab is active
-//       const filteredVehicles = showReusableVehicles
-//         ? vehiclesData.filter((vehicle) => vehicle.reusable === true)
-//         : vehiclesData;
-
-//       setVehicles(filteredVehicles);
-//     } catch (error) {
-//       console.error("Error fetching vehicles:", error);
-//     }
-//   };
-
-//   const handleToggleReusable = () => {
-//     setShowReusableVehicles(true);
-//     fetchVehicles();
-//   };
-
-//   const handleToggleAll = () => {
-//     setShowReusableVehicles(false);
-//     fetchVehicles();
-//   };
-
-//   return (
-//     <div className="vehicles">
-//       <h1 className="vehicles__heading">Vehicles</h1>
-//       <div className="vehicles__toggle">
-//         <button
-//           className={`vehicles__toggle-button ${
-//             !showReusableVehicles ? "active" : ""
-//           }`}
-//           onClick={handleToggleAll}
-//         >
-//           All Vehicles
-//         </button>
-//         <button
-//           className={`vehicles__toggle-button ${
-//             showReusableVehicles ? "active" : ""
-//           }`}
-//           onClick={handleToggleReusable}
-//         >
-//           Reusable Vehicles
-//         </button>
-//       </div>
-//       <div className="vehicles__card-container">
-//         {vehicles.map((vehicle, index) => (
-//           <div key={index} className="vehicles__card">
-//             <div className="vehicles__image-container">
-//               <img
-//                 className="vehicles__image"
-//                 src={vehicle.image_url}
-//                 alt={vehicle.name}
-//               />
-//             </div>
-//             <div className="vehicles__details">
-//               <h2 className="vehicles__title">{vehicle.name}</h2>
-//               <p className="vehicles__family">Family: {vehicle.family}</p>
-//               <p className="vehicles__variant">Variant: {vehicle.variant}</p>
-//               <p className="vehicles__status">Status: {vehicle.status}</p>
-//               <p className="vehicles__details">Details: {vehicle.details}</p>
-//               <p className="vehicles__flights">Flights: {vehicle.flights}</p>
-//               {vehicle.last_launch_date && (
-//                 <p className="vehicles__last-launch-date">
-//                   Last Launch Date:{" "}
-//                   {new Date(vehicle.last_launch_date).toLocaleDateString()}
-//                 </p>
-//               )}
-//               {vehicle.first_launch_date && (
-//                 <p className="vehicles__first-launch-date">
-//                   First Launch Date:{" "}
-//                   {new Date(vehicle.first_launch_date).toLocaleDateString()}
-//                 </p>
-//               )}
-//               <div className="vehicles__links">
-//                 {vehicle.info_url && (
-//                   <a className="vehicles__info-link" href={vehicle.info_url}>
-//                     Info
-//                   </a>
-//                 )}
-//                 {vehicle.wiki_url && (
-//                   <a className="vehicles__wiki-link" href={vehicle.wiki_url}>
-//                     Wikipedia
-//                   </a>
-//                 )}
-//               </div>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default VehiclesPage;
-
-
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Vehicles.scss";
 
-function VehiclesPage() {
-  const [vehicles, setVehicles] = useState([]);
-  const [filteredVehicles, setFilteredVehicles] = useState([]);
+function Vehicles() {
+  const [launchVehicles, setLaunchVehicles] = useState([]);
+  const [reusableVehicles, setReusableVehicles] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showLaunchVehicles, setShowLaunchVehicles] = useState(true);
   const [showReusableVehicles, setShowReusableVehicles] = useState(false);
 
   useEffect(() => {
-    fetchVehicles();
+    fetchLaunchVehicles();
+    fetchReusableVehicles();
   }, []);
 
-  useEffect(() => {
-    filterVehicles();
-  }, [searchQuery, vehicles]);
-
-  const fetchVehicles = async () => {
+  const fetchLaunchVehicles = async () => {
     try {
-      const response = await axios.get("/vehicles");
-      const vehiclesData = response.data.results;
-      setVehicles(vehiclesData);
+      const response = await axios.get("https://ll.thespacedevs.com/2.2.0/launcher/", {
+        params: {
+          ordering: "id",
+          flight_proven: false
+        }
+      });
+      setLaunchVehicles(response.data.results || []);
     } catch (error) {
-      console.error("Error fetching vehicles:", error);
+      console.error("Error fetching launch vehicles:", error);
     }
   };
 
-  const filterVehicles = () => {
-    const filteredVehicles = vehicles.filter(vehicle =>
-      vehicle.name?.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredVehicles(filteredVehicles);
+  const fetchReusableVehicles = async () => {
+    try {
+      const response = await axios.get("https://ll.thespacedevs.com/2.2.0/launcher/", {
+        params: {
+          ordering: "id",
+          flight_proven: true
+        }
+      });
+      setReusableVehicles(response.data.results || []);
+    } catch (error) {
+      console.error("Error fetching reusable vehicles:", error);
+    }
   };
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  const handleToggleReusable = () => {
-    setShowReusableVehicles(true);
-    fetchVehicles();
+  const toggleLaunchVehicles = () => {
+    setShowLaunchVehicles(true);
+    setShowReusableVehicles(false);
   };
 
-  const handleToggleAll = () => {
-    setShowReusableVehicles(false);
-    fetchVehicles();
+  const toggleReusableVehicles = () => {
+    setShowLaunchVehicles(false);
+    setShowReusableVehicles(true);
   };
 
   return (
@@ -174,69 +71,55 @@ function VehiclesPage() {
       </div>
       <div className="vehicles__toggle">
         <button
-          className={`vehicles__toggle-button ${
-            !showReusableVehicles ? "active" : ""
-          }`}
-          onClick={handleToggleAll}
+          className={`vehicles__toggle-button ${showLaunchVehicles ? "active" : ""}`}
+          onClick={toggleLaunchVehicles}
         >
-          All Vehicles
+          Launch Vehicles
         </button>
         <button
-          className={`vehicles__toggle-button ${
-            showReusableVehicles ? "active" : ""
-          }`}
-          onClick={handleToggleReusable}
+          className={`vehicles__toggle-button ${showReusableVehicles ? "active" : ""}`}
+          onClick={toggleReusableVehicles}
         >
           Reusable Vehicles
         </button>
       </div>
       <div className="vehicles__card-container">
-        {filteredVehicles.map((vehicle, index) => (
-          <div key={index} className="vehicles__card">
-            <div className="vehicles__image-container">
-              <img
-                className="vehicles__image"
-                src={vehicle.image_url}
-                alt={vehicle.name}
-              />
-            </div>
-            <div className="vehicles__details">
-              <h2 className="vehicles__title">{vehicle.name}</h2>
-              <p className="vehicles__family">Family: {vehicle.family}</p>
-              <p className="vehicles__variant">Variant: {vehicle.variant}</p>
-              <p className="vehicles__status">Status: {vehicle.status}</p>
-              <p className="vehicles__details">Details: {vehicle.details}</p>
-              <p className="vehicles__flights">Flights: {vehicle.flights}</p>
-              {vehicle.last_launch_date && (
-                <p className="vehicles__last-launch-date">
-                  Last Launch Date:{" "}
-                  {new Date(vehicle.last_launch_date).toLocaleDateString()}
-                </p>
-              )}
-              {vehicle.first_launch_date && (
-                <p className="vehicles__first-launch-date">
-                  First Launch Date:{" "}
-                  {new Date(vehicle.first_launch_date).toLocaleDateString()}
-                </p>
-              )}
-              <div className="vehicles__links">
-                {vehicle.info_url && (
-                  <a className="vehicles__info-link" href={vehicle.info_url}>
-                    Info
-                  </a>
-                )}
-                {vehicle.wiki_url && (
-                  <a className="vehicles__wiki-link" href={vehicle.wiki_url}>
-                    Wikipedia
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
+        {showLaunchVehicles && launchVehicles.map((vehicle, index) => (
+          <VehicleCard key={index} vehicle={vehicle} />
+        ))}
+        {showReusableVehicles && reusableVehicles.map((vehicle, index) => (
+          <VehicleCard key={index} vehicle={vehicle} />
         ))}
       </div>
     </div>
   );
 }
 
-export default VehiclesPage;
+function VehicleCard({ vehicle }) {
+  return (
+    <div className="vehicles__card">
+      <div className="vehicles__image-container">
+        <img className="vehicles__image" src={vehicle.image_url} alt={vehicle.serial_number} />
+      </div>
+      <div className="vehicles__details">
+        <h2 className="vehicles__title">{vehicle.launcher_config?.name}</h2>
+        <p className="vehicles__variant">Variant: {vehicle.launcher_config?.variant}</p>
+        <p className="vehicles__status">Status: {vehicle.status}</p>
+        <p className="vehicles__details">Details: {vehicle.details}</p>
+        <p className="vehicles__flights">Flights: {vehicle.flights}</p>
+        {vehicle.last_launch_date && (
+          <p className="vehicles__last-launch-date">
+            Last Launch Date: {new Date(vehicle.last_launch_date).toLocaleDateString()}
+          </p>
+        )}
+        {vehicle.first_launch_date && (
+          <p className="vehicles__first-launch-date">
+            First Launch Date: {new Date(vehicle.first_launch_date).toLocaleDateString()}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default Vehicles;
